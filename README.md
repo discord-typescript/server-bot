@@ -1,2 +1,1 @@
-# server-bot
-Discord.TS server bot!
+# Discord.ts-Bot
