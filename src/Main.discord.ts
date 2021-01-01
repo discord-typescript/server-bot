@@ -11,7 +11,7 @@ export class Main {
     this._client = new Client();
 
     this._client.login(
-      "Nzg3NTE0MjQ1ODQ3NDQ5NjEw.X9WDyw.IFy0-vmICCNScQKt2Femp0w5fi8",
+      "TOKEN",
       `${__dirname}/*.ts`,
       `${__dirname}/*.js`,
     );
