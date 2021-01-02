@@ -1,4 +1,6 @@
 import { Client } from "@typeit/discord";
+import { config as configDotenv } from "dotenv";
+import { resolve } from "path";
 
 export class Main {
   private static _client: Client;
@@ -10,10 +12,14 @@ export class Main {
   static start(): void {
     this._client = new Client();
 
+    configDotenv({
+      path: resolve(resolve(__dirname, "../env/env.variables")),
+    });
+
     this._client.login(
-      "TOKEN",
+      process.env.DISCORD_TOKEN,
       `${__dirname}/*.ts`,
-      `${__dirname}/*.js`,
+      `${__dirname}/*.js`
     );
   }
 }
