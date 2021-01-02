@@ -6,8 +6,11 @@ import * as Path from "path";
 @Discord("?", {
   import: [
     Path.join(__dirname, "commands", "*.ts"),
+    Path.join(__dirname, "commands", "*.js"),
     Path.join(__dirname, "guild", "*.ts"),
+    Path.join(__dirname, "guild", "*.js"),
     Path.join(__dirname, "member", "*.ts"),
+    Path.join(__dirname, "member", "*.js"),
   ],
 })
 @Description("Main Discord event handlers.")
