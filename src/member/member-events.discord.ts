@@ -20,8 +20,9 @@ export abstract class MemberEvents {
     );
     const guild = member.guild;
 
+    guild.systemChannel.send(`Hello ${member}! Welcome to the **Discord.ts Library** Discord!`)
+
     guild.roles.fetch(ID.MEMBER_ROLE).then((role: Role) => {
-      console.log(role);
       member.roles
         .add(role)
         .then((newMember) => {
