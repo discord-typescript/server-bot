@@ -49,11 +49,11 @@ export abstract class Starter {
   changeStatus(client: Client): void {
     let status = 3;
     const activities = [
-      'https://discord.js.org/#/',
+      'https://discord.js.org/',
       '?help',
       'https://github.com/OwenCalvin/discord.ts',
       '',
-      'https://www.npmjs.com/package/@typeit/discord!',
+      'https://www.npmjs.com/package/@typeit/discord',
       '?docs',
     ];
     setInterval(() => {
