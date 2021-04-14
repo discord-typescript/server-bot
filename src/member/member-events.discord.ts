@@ -1,6 +1,8 @@
 import { Description, On, ArgsOf } from "@typeit/discord";
-import { Role } from "discord.js";
+import { MessageEmbed, Role } from "discord.js";
+import { COLOR } from "../enums/colors.enum";
 import { ID } from "../enums/id.enum";
+import { IMAGE } from "../enums/images.enum";
 import { Logger } from "../services/logger.service";
 
 @Description("Discord Member Event Handlers")
@@ -31,6 +33,21 @@ export abstract class MemberEvents {
         .catch(() => {
           this.logger.error(`Failed to put member role on ${member.id}`);
         });
+    });
+
+    const embed = new MessageEmbed();
+    embed
+      .setTitle(`Welcome to Discord.TS`)
+      .setDescription(
+        `Hello ${member}, Please take a look at <#${ID.RULES_CHANNEL}> and <#${ID.INFO_CHANNEL}>!\n` +
+        `If you have a question related to **Discord.TS** ask in one of the Help channels.`
+      )
+      .setColor(COLOR.BLUE)
+      .setThumbnail(IMAGE.ICON);
+    member.send({ embed }).then((messageSent) => {
+      this.logger.info(`Sent Welcome : message id ${messageSent.id}`);
+    }).catch((error) => {
+      this.logger.error('Welcome DM : error', error);
     });
   }
 }
