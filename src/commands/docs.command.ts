@@ -8,7 +8,7 @@ import { Logger } from "../services/logger.service";
 
 export abstract class Docs {
 
-    logger = Logger.prototype.getInstance();
+  logger = Logger.prototype.getInstance();
 
   /**
    * @name docs
@@ -32,8 +32,10 @@ export abstract class Docs {
       .setThumbnail(IMAGE.ICON)
       .setFooter("Clicking the blue text will take you to the docs.");
 
-    command.reply({ embed }).then((messageSent) => {
+    command.channel.send({ embed }).then((messageSent) => {
       this.logger.info(`Sent Docs : message id ${messageSent.id}`);
+    }).catch((error) => {
+      this.logger.error('Docs message : error', error);
     });
   }
 }
