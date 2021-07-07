@@ -1,11 +1,12 @@
-import { Command, CommandMessage, Guard } from "@typeit/discord";
-import { MessageEmbed } from "discord.js";
+import { Description, Discord, Guard, Slash } from "@typeit/discord";
+import { CommandInteraction, MessageEmbed } from "discord.js";
 import { COLOR } from "../enums/colors.enum";
 import { IMAGE } from "../enums/images.enum";
 import { LINK } from "../enums/links.enum";
 import { NotBot } from "../guards/NotABot.guard";
 import { Logger } from "../services/logger.service";
 
+@Discord()
 export abstract class Help {
 
   logger = Logger.prototype.getInstance();
@@ -17,9 +18,10 @@ export abstract class Help {
    * @description
    * Sends the Discord.TS & Discord.JS Documentation link for sharding.
    */
-  @Command("shard")
+  @Slash("shard")
   @Guard(NotBot)
-  async shard(command: CommandMessage): Promise<void> {
+  @Description("Important information for sharding.")
+  async shard(interaction: CommandInteraction): Promise<void> {
     this.logger.info("Sending Sharding Docs");
 
     const embed = new MessageEmbed();
@@ -34,10 +36,10 @@ export abstract class Help {
       .setColor(COLOR.BLUE)
       .setThumbnail(IMAGE.ICON);
 
-    command.channel.send({ embed }).then((messageSent) => {
-      this.logger.info(`Sent Sharding Docs : message id ${messageSent.id}`);
-    }).catch((error) => {
-      this.logger.error('Sharding Docs message : error', error);
-    });
+      interaction.reply({ embeds: [embed] }).then(() => {
+        this.logger.info(`Sent Sharding`);
+      }).catch((error) => {
+        this.logger.error('Sharding message : error', error);
+      });
   }
 }
