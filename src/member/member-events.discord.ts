@@ -1,11 +1,11 @@
-import { Description, On, ArgsOf } from "@typeit/discord";
+import { On, ArgsOf, Discord } from "@typeit/discord";
 import { MessageEmbed, Role } from "discord.js";
 import { COLOR } from "../enums/colors.enum";
 import { ID } from "../enums/id.enum";
 import { IMAGE } from "../enums/images.enum";
 import { Logger } from "../services/logger.service";
 
-@Description("Discord Member Event Handlers")
+@Discord()
 export abstract class MemberEvents {
   logger = Logger.prototype.getInstance();
 
@@ -44,7 +44,7 @@ export abstract class MemberEvents {
       )
       .setColor(COLOR.BLUE)
       .setThumbnail(IMAGE.ICON);
-    member.send({ embed }).then((messageSent) => {
+    member.send({ embeds: [embed] }).then((messageSent) => {
       this.logger.info(`Sent Welcome : message id ${messageSent.id}`);
     }).catch((error) => {
       this.logger.error('Welcome DM : error', error);
