@@ -3,17 +3,7 @@ import { Logger } from "./services/logger.service";
 import * as chalk from "chalk";
 import * as Path from "path";
 
-@Discord("?", {
-  import: [
-    Path.join(__dirname, "commands", "*.ts"),
-    Path.join(__dirname, "commands", "*.js"),
-    Path.join(__dirname, "guild", "*.ts"),
-    Path.join(__dirname, "guild", "*.js"),
-    Path.join(__dirname, "member", "*.ts"),
-    Path.join(__dirname, "member", "*.js"),
-  ],
-})
-@Description("Main Discord event handlers.")
+@Discord()
 export abstract class Starter {
   logger = Logger.prototype.getInstance();
 
@@ -50,11 +40,13 @@ export abstract class Starter {
     let status = 3;
     const activities = [
       'https://discord.js.org/',
-      '?help',
+      '/help',
       'https://github.com/OwenCalvin/discord.ts',
+      'https://owencalvin.github.io/discord.ts/',
       '',
       'https://www.npmjs.com/package/@typeit/discord',
-      '?docs',
+      '/docs',
+      'Now with Slash commands!',
     ];
     setInterval(() => {
       client.user.setActivity(activities[status]);
